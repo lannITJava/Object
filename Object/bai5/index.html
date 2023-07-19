@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 5</title>
+</head>
+<body>
+    <script>
+        let read = {}
+        read.width= 300;
+        read.height= 500;
+        console.log(read);
+        let sum =0;
+        let mul =1;
+        for (const key in read) {
+            sum += read[key];
+            mul *= read[key];
+        }
+        console.log("Tổng giá trị đã lưu :", sum);
+        console.log("Tích các giá trị đã lưu :", mul);
+    </script>
+</body>
+</html>

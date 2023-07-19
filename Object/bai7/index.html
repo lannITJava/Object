@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 7</title>
+</head>
+<body>
+    <form action="#">
+        <label for="bookId">Book Id</label>
+        <input type="text" id="bookId" name="bookId"><br>
+        <label for="bookName">Book Name</label>
+        <input type="text" id="bookName" name="bookName"><br>
+        <label for="price">Price</label>
+        <input type="number" id="price" name="price"><br>
+        <label for="author">Author</label>
+        <input type="text" id="author" name="author"><br>
+        <label for="status">Status</label>
+        <input type="radio" id="active" name="status" checked value="active">
+        <label for="active">Active</label>
+        <input type="radio" id="inActive" name="status" value="inActive">
+        <label for="inActive">inActive</label><br>
+        <input type="submit" value="Submit" id="btnSubmit">
+    </form>
+    <div>
+        <label for="searchBookName">Book Name</label>
+        <input type="text" name="searchBookName" id="searchBookName">
+        <button id="btnSearch">Search</button>
+        <button id="btnSort">Sort by Price ASC</button>
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+            
+                <th>BookId</th>
+                <th>Book Name</th>
+                <th>Price</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="content">
+            
+
+        </tbody>
+    </table>
+    <script src="./main.js"></script>
+</body>
+</html>

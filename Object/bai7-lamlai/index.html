@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bai 7</title>
+</head>
+<body>
+    <form action="#">
+        <input type="text" id="bookId" name="bookId" placeholder="Book Id"><br>
+        <input type="text" name="bookName" id="bookName" placeholder="Book Name"><br>
+        <input type="number" name="price" id="price" placeholder="Price"><br>
+        <input type="text" id="author" name="author" placeholder="Author"><br>
+        <label for="status">Status</label>
+        <input type="radio" id="active" value="active" checked name="status">
+        <label for="active">Active</label>
+        <input type="radio" id="inActive" value="inActive" name="status">
+        <label for="inActive">InActive</label><br>
+        <button id="btnSubmit">Submit</button>
+    </form>
+    <div>
+        <input type="text" id="search" name="searchBookName">
+        <button id="searchBookName">Search</button>
+        <button id="btnSort">Sort By Price</button>
+
+    </div>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Book ID</th>
+                <th>Book Name</th>
+                <th>price</th>
+                <th>Author</th>
+                <th>Status</th>
+                <th>
+                   Action
+                </th>
+            </tr>
+        </thead>
+        <tbody id="content">
+            
+        </tbody>
+    </table>
+
+    <script>
+        let arrBook =[];
+        let action ="create";
+        function Book() {
+            this.inputData = ()=> {
+                this.bookId = document.getElementById("bookId").value;
+                this.bookName = document.getElementById("bookName").value;
+                this.price = +document.getElementById("price").value;
+                this.author = document.getElementById("author").value;
+                this.status = document.querySelector("input[type='radio']:checked").value;
+            }
+            this.displayData =()=>{
+                let tbody = document.getElementById("content");
+                tbody.innerHTML+=`<tr>  
+                                                         <td>${this.bookId}</td>
+                                                         <td>${this.bookName}</td>
+                                                         <td>${this.price}</td>
+                                                         <td>${this.author}</td>
+                                                         <td>${this.status}</td>
+                                                         <td>
+                                                            <button onclick="initEdit('${this.bookId}')">Edit</button>
+                                                            <button onclick="deleteBook('${this.bookId}')">Delete</button>
+                                                         </td>
+                                                      </tr>`
+
+            }
+        }
+        function displayListBook() {
+            document.getElementById("content").innerHTML="";
+            for (let index = 0; index < arrBook.length; index++) {
+               arrBook[index].displayData();
+            }
+        }
+
+        let btnSubmit = document.getElementById("btnSubmit");
+        btnSubmit.addEventListener("click",(event)=>{
+            event.preventDefault();
+            if (action =="create") {
+                let newBook = new Book ();
+                newBook.inputData();
+                arrBook.push(newBook);
+                displayListBook();
+                clearDataForm();
+            } else {
+                let upDateBook =new Book();
+                upDateBook.inputData();
+                let indexUpdate = getIndexBookById(upDateBook.bookId)
+
+                displayListBook();
+                clearDataForm();
+                action="create";
+                document.getElementById("bookId").readOnly= false;
+            }
+        })
+        function getIndexBookById(bookId) {
+    for (let index = 0; index < arrBook.length; index++) {
+       if (arrBook[index].bookId== bookId) {
+        return index;
+       }
+    }
+    return -1;
+}
+        function initEdit(bookId) {
+            for (let index = 0; index < arrBook.length; index++) {
+             
+               if (arrBook[index].bookId==bookId) {
+                document.getElementById("bookId").value= arrBook[index].bookId;
+                document.getElementById("bookId").readOnly = true;
+                document.getElementById("bookName").value= arrBook[index].bookName;
+                document.getElementById("price").value= arrBook[index].price;
+                document.getElementById("author").value= arrBook[index].author;
+                if (arrBook[index].status=="active") {
+                    document.getElementById("active").checked=true;
+                } else {
+                    document.getElementById("inActive").checked=true;
+                }
+                action="Edit";
+                break;
+               }
+            }
+        }
+
+        function clearDataForm() {
+            document.getElementById("bookId").value="";
+            document.getElementById("bookName").value="";
+            document.getElementById("price").value="";
+            document.getElementById("author").value="";
+            document.getElementById("active").checked = true;
+        }
+        document.onload= displayListBook();
+    </script>
+</body>
+</html>
